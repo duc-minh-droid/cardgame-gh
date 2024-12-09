@@ -15,7 +15,20 @@ public class Deck {
     public int size() {
         return cards.size();
     }
+    
+    public Boolean isEmpty() {
+        return cards.isEmpty();
+    }
 
+    public int getId() {
+        return id;
+    }
+    
+     /**
+     * Adds given card to the bottom of the deck.
+     * 
+     * @param card to add to the deck
+     */
     public void addCard(Card card) {
         try {
             lock.lock();
@@ -25,6 +38,11 @@ public class Deck {
         }
     }
 
+    /**
+     * Removes and returns the top card of the deck.
+     * 
+     * @return Card that is on top of the deck
+     */
     public Card removeCard() {
         try {
             lock.lock();
@@ -33,14 +51,6 @@ public class Deck {
             lock.unlock();
         }
 
-    }
-
-    public Boolean isEmpty() {
-        return cards.isEmpty();
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void logDeckContents() {
