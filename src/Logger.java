@@ -28,7 +28,7 @@ public class Logger {
         }
     }
 
-     /**
+    /**
      * Writes the given text to the file.
      * 
      * @param message to be written
