@@ -28,6 +28,11 @@ public class Logger {
         }
     }
 
+     /**
+     * Writes the given text to the file.
+     * 
+     * @param message to be written
+     */
     public void log(String message) {
         try {
             writer.write(message);
