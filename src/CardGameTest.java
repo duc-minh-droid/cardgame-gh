@@ -14,6 +14,32 @@ import static org.junit.Assert.*;
 public class CardGameTest {
     private static final String FILE_PATH = "src/four.txt";
 
+    @After
+    public void tearDown() {
+        // Clean up all test files and directories in "gameOutput"
+        File directory = new File("gameOutput");
+        if (directory.exists()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        // Recursively delete subdirectories
+                        File[] subFiles = file.listFiles();
+                        if (subFiles != null) {
+                            for (File subFile : subFiles) {
+                                subFile.delete(); // Delete files in subdirectory
+                            }
+                        }
+                        file.delete(); // Delete the empty subdirectory
+                    } else {
+                        file.delete(); // Delete individual files
+                    }
+                }
+            }
+            directory.delete(); // Delete the main directory
+        }
+    }
+
     @Test 
     public void testReadPack(){
         // Read a pack file with 8*n cards (for n=4 players)

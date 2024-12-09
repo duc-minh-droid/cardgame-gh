@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -7,13 +8,12 @@ import java.io.IOException;
 
 public class DeckTest{
     private Deck deck;
-
-
+    
     @Before
     public void initialisation() throws IOException{
         deck = new Deck(1);
     }
-
+    
     @Test
     public void testAddCard() {
         Card card1 = new Card(5);
