@@ -53,7 +53,7 @@ public class CardGame {
         List<Card> pack = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            // get card value from file
+            // Get card value from file
             while ((line = br.readLine()) != null) {
                 Card newCard = new Card(Integer.valueOf(line));
                 pack.add(newCard);
@@ -61,7 +61,7 @@ public class CardGame {
         } catch (IOException | NumberFormatException e) {
             return null; // Return null if an error occurs
         }
-        // shuffle to ensure randomness
+        // Shuffle to ensure randomness
         Collections.shuffle(pack);
         return pack.size() == 8 * n ? pack : null; // Check if the list size is as expected
 
@@ -82,7 +82,7 @@ public class CardGame {
     }
     
     public void initializeGame(int n, String filePath) {
-        // clear any existing previous game output
+        // Clear any existing previous game output
         File gameOutputDir = new File("gameOutput");
         if (gameOutputDir.exists() && gameOutputDir.isDirectory()) {
             File[] files = gameOutputDir.listFiles();
@@ -97,23 +97,23 @@ public class CardGame {
 
         pack = readPack(filePath, n);
         playersNum = n;
-        // initialize each deck
+        // Initialise each deck
         for (int i = 1; i <= n; i++) {
             decks.add(new Deck(i));
         }
-        // initialize each player
+        // Initialise each player
         for (int i = 1; i <= n; i++) {
             players.add(new Player(i, decks.get(i-1), this));
         }
         distributeCards(players, decks, pack);
-        // log initial hand for each player
+        // Log initial hand for each player
         for (Player player : players) {
             player.logInitialHand();
         }
     }
 
     public Player getNextPlayer(Player p) {
-        // get next player based the player object
+        // Get next player based on the player object
         int i = players.indexOf(p) + 1;
         if (i > players.size() - 1) {
             return players.get(0);
@@ -135,21 +135,21 @@ public class CardGame {
     }
 
     public void logDecks() {
-        // log content of each deck
+        // Log content of each deck
         for (Deck deck : decks) {
             deck.logDeckContents();
         }
     }
 
     public void startGame() {
-        // start all threads
+        // Start all threads
         for (Player p : players) {
             p.start();
         }
     }
 
     public void endGame() throws Exception {
-        // join all threads to conclude results
+        // Join all threads to conclude results
         for (Player p : players) {
             p.join();
         }

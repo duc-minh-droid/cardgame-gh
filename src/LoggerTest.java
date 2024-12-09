@@ -32,7 +32,7 @@ public class LoggerTest {
     }
 
     @After
-    public void tearDown() {
+    public void deleteOutput() {
         // Clean up all test files after each test
         deleteDirectory(new File("gameOutput")); 
         deleteDirectory(new File(TEST_DIR));
